@@ -8,10 +8,25 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Messenger",
+"language": "GDScript",
+"path": "res://Messenger.gd"
+} ]
+_global_script_class_icons={
+"Messenger": ""
+}
+
 [application]
 
 config/name="Sample Project Global Messenger"
+run/main_scene="res://TestScene.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GlobalMessenger="*res://global_messenger.gd"
 
 [physics]
 

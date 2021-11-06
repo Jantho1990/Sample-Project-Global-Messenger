@@ -2,8 +2,8 @@ class_name Messenger
 extends Node
 
 
-var _message_listeners =: {} # Stores nodes that are listening for messages.
-var _message_queue =: [] # Stores messages that are being deferred until the next physics process tick.
+var _message_listeners := {} # Stores nodes that are listening for messages.
+var _message_queue := [] # Stores messages that are being deferred until the next physics process tick.
 var _messenger_ready := false # Is set to true once the root node is ready, indicating the messenger is ready to process messages.
 
 
@@ -17,7 +17,7 @@ func _on_Root_ready() -> void:
 
 
 # Invoke all listener callbacks for specified message.
-func _process_message_listeners(message: Object) -> void:
+func _process_message_listeners(message: Dictionary) -> void:
   var message_name = message.name
   
   # If there aren't any listeners for this message name, we can return early.
@@ -37,7 +37,7 @@ func _process_message_listeners(message: Object) -> void:
         continue
     
     # Invoke the callback.
-    listener.node.call(listener.method_name, message.data)
+    listener.object.call(listener.method_name, message.data)
 
 
 # Process all messages in the message queue and reset the queue to an empty array.
@@ -49,11 +49,11 @@ func _process_message_queue() -> void:
 
 
 # Removes a listener if it no longer exists, and returns whether the listener was removed.
-func _purge_listener(listeners: Array, listener: Object) -> bool:
-  var object_exists = !!weakref(listener.node).get_ref() and is_instance_valid(listener.node)
+func _purge_listener(listeners: Dictionary, listener: Dictionary) -> bool:
+  var object_exists = !!weakref(listener.object).get_ref() and is_instance_valid(listener.object)
     
-  if !object_exists or listener.node.get_instance_id() != listener.node_id:
-    listeners.erase(listener.node_id)
+  if !object_exists or listener.object.get_instance_id() != listener.object_id:
+    listeners.erase(listener.object_id)
     return true
 
   return false
@@ -82,6 +82,9 @@ func dispatch_message(message_name: String, data := {}) -> void:
 
 # Remove object from listening for the specified message.
 func remove_listener(message_name: String, object: Object) -> void:
+  if not _message_listeners.has(message_name):
+    return
+  
   if _message_listeners[message_name].has(object.get_instance_id()):
     _message_listeners[message_name].erase(object.get_instance_id())
   
