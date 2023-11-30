@@ -1,16 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://b7u1u2ipx00w6"]
 
-[ext_resource path="res://LocalMessenger.gd" type="Script" id=2]
-[ext_resource path="res://OrdinaryNode.gd" type="Script" id=3]
-[ext_resource path="res://DifferentNode.gd" type="Script" id=4]
+[ext_resource type="Script" path="res://LocalMessenger.gd" id="2"]
+[ext_resource type="Script" path="res://OrdinaryNode.gd" id="3"]
+[ext_resource type="Script" path="res://DifferentNode.gd" id="4"]
 
 [node name="TestScene" type="Node"]
 
 [node name="OrdinaryNode" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="DifferentNode" type="Node" parent="."]
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="LocalMessenger" type="Node" parent="."]
-script = ExtResource( 2 )
+script = ExtResource("2")
