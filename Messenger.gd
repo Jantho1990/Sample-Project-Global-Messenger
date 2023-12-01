@@ -8,11 +8,12 @@ var _messenger_ready := false # Is set to true once the root node is ready, indi
 
 
 func _ready() -> void:
-  get_tree().get_root().connect('ready', self, '_on_Root_ready')
+  get_tree().get_root().ready.connect(_on_Root_ready)
 
 
 # Is called when the root node of the main scene tree emits the ready signal.
 func _on_Root_ready() -> void:
+  _messenger_ready = true  
   _process_message_queue()
 
 
@@ -88,5 +89,5 @@ func remove_listener(message_name: String, object: Object) -> void:
   if _message_listeners[message_name].has(object.get_instance_id()):
     _message_listeners[message_name].erase(object.get_instance_id())
   
-  if _message_listeners[message_name].empty():
+  if _message_listeners[message_name].is_empty():
     _message_listeners.erase(message_name)

@@ -1,7 +1,7 @@
 extends Node
 
 
-onready var localMessenger = $"../LocalMessenger"
+@onready var localMessenger = $"../LocalMessenger"
 
 
 func _ready() -> void:

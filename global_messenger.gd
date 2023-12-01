@@ -3,11 +3,12 @@ extends Messenger
 
 
 func _ready() -> void:
+  super._ready()
   set_physics_process(false)
 
 
 func _physics_process(_delta) -> void:
-  ._process_message_queue()
+  super._process_message_queue()
   set_physics_process(false) # We don't need to keep updating once messages are processed.
 
 
