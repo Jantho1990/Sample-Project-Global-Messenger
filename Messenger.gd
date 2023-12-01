@@ -13,6 +13,7 @@ func _ready() -> void:
 
 # Is called when the root node of the main scene tree emits the ready signal.
 func _on_Root_ready() -> void:
+  _messenger_ready = true
   _process_message_queue()
 
 
