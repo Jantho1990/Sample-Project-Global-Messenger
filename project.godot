@@ -6,22 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Node",
-"class": "Messenger",
-"language": "GDScript",
-"path": "res://Messenger.gd"
-} ]
-_global_script_class_icons={
-"Messenger": ""
-}
+config_version=5
 
 [application]
 
 config/name="Sample Project Global Messenger"
 run/main_scene="res://TestScene.tscn"
+config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 
 [autoload]
@@ -34,4 +25,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://default_env.tres"
